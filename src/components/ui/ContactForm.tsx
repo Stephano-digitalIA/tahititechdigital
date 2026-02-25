@@ -143,14 +143,14 @@ export default function ContactForm() {
 
       <div className="form-group">
         <label>
-          Vos besoins <span className="required">*</span>
+          Vos besoins {!audioBase64 && <span className="required">*</span>}
         </label>
         <textarea
           name="besoins"
           value={formData.besoins}
           onChange={handleChange}
           placeholder="Décrivez les tâches que vous aimeriez automatiser ou le projet que vous avez en tête..."
-          required
+          required={!audioBase64}
         />
       </div>
 

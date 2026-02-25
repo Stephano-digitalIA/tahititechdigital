@@ -1,5 +1,7 @@
 import { NextResponse } from 'next/server'
 import { Resend } from 'resend'
+import OpenAI from 'openai'
+import { toFile } from 'openai'
 
 export async function POST(request: Request) {
   try {
@@ -8,6 +10,24 @@ export async function POST(request: Request) {
 
     if (!process.env.RESEND_API_KEY) {
       return NextResponse.json({ error: 'RESEND_API_KEY non configuré' }, { status: 500 })
+    }
+
+    // Transcription audio via Whisper
+    let transcription = ''
+    if (audioBase64 && process.env.OPENAI_API_KEY) {
+      try {
+        const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY })
+        const audioBuffer = Buffer.from(audioBase64 as string, 'base64')
+        const audioFile = await toFile(audioBuffer, 'message-vocal.webm', { type: 'audio/webm' })
+        const result = await openai.audio.transcriptions.create({
+          file: audioFile,
+          model: 'whisper-1',
+          language: 'fr',
+        })
+        transcription = result.text
+      } catch {
+        transcription = '(transcription indisponible)'
+      }
     }
 
     const resend = new Resend(process.env.RESEND_API_KEY)
@@ -30,8 +50,9 @@ export async function POST(request: Request) {
           <tr><td style="padding:8px;font-weight:bold">Email</td><td style="padding:8px">${email}</td></tr>
           <tr><td style="padding:8px;font-weight:bold">Entreprise</td><td style="padding:8px">${entreprise}</td></tr>
           <tr><td style="padding:8px;font-weight:bold">Secteur</td><td style="padding:8px">${secteur || 'Non renseigné'}</td></tr>
-          <tr><td style="padding:8px;font-weight:bold;vertical-align:top">Besoins</td><td style="padding:8px">${besoins}</td></tr>
-          ${audioBase64 ? '<tr><td style="padding:8px;font-weight:bold">Message vocal</td><td style="padding:8px">✅ Fichier audio joint (message-vocal.webm)</td></tr>' : ''}
+          ${besoins ? `<tr><td style="padding:8px;font-weight:bold;vertical-align:top">Besoins</td><td style="padding:8px">${besoins}</td></tr>` : ''}
+          ${transcription ? `<tr><td style="padding:8px;font-weight:bold;vertical-align:top">Message vocal (transcription)</td><td style="padding:8px">${transcription}</td></tr>` : ''}
+          ${audioBase64 ? '<tr><td style="padding:8px;font-weight:bold">Fichier audio</td><td style="padding:8px">✅ message-vocal.webm joint</td></tr>' : ''}
         </table>
       `,
     })
