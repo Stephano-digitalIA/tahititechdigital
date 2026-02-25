@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { useNavbarScroll } from '@/hooks/useNavbarScroll'
+import ThemeToggle from '@/components/ui/ThemeToggle'
 
 export default function Navbar() {
   const isScrolled = useNavbarScroll()
@@ -26,6 +27,8 @@ export default function Navbar() {
         </ul>
 
         <a href="#contact" className="nav-cta">Démarrer un projet</a>
+
+        <ThemeToggle />
 
         <button
           className="nav-mobile-toggle"

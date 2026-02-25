@@ -24,8 +24,15 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="fr" className={`${outfit.variable} ${jetbrainsMono.variable}`}>
-      <body>{children}</body>
+    <html lang="fr" className={`${outfit.variable} ${jetbrainsMono.variable}`} suppressHydrationWarning>
+      <body>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){try{var t=localStorage.getItem('theme');if(t==='light')document.documentElement.setAttribute('data-theme','light');}catch(e){}})()`,
+          }}
+        />
+        {children}
+      </body>
     </html>
   )
 }

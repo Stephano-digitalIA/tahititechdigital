@@ -41,6 +41,56 @@
 }
 
 /* ================================================
+   THEME CLAIR
+   ================================================ */
+[data-theme="light"] {
+    --bg-deep: #f0efff;
+    --bg-primary: #f5f4ff;
+    --bg-secondary: #eaeaff;
+    --bg-card: rgba(255, 255, 255, 0.8);
+    --bg-card-hover: rgba(243, 240, 255, 0.95);
+    --bg-glass: rgba(255, 255, 255, 0.6);
+
+    --text-white: #0f0e2e;
+    --text-primary: #1e1c3e;
+    --text-secondary: #4a4868;
+    --text-muted: #8888a8;
+
+    --border-subtle: rgba(139, 92, 246, 0.2);
+    --border-active: rgba(139, 92, 246, 0.45);
+    --border-glow: rgba(139, 92, 246, 0.65);
+
+    --shadow-sm: 0 4px 20px rgba(80, 60, 160, 0.08);
+    --shadow-md: 0 8px 40px rgba(80, 60, 160, 0.12);
+    --shadow-glow: 0 0 40px rgba(139, 92, 246, 0.12);
+    --shadow-neon: 0 0 60px rgba(139, 92, 246, 0.12), 0 0 120px rgba(99, 102, 241, 0.06);
+}
+
+[data-theme="light"] .navbar.scrolled {
+    background: rgba(245, 244, 255, 0.92);
+}
+
+[data-theme="light"] .nav-links.open {
+    background: rgba(245, 244, 255, 0.97);
+}
+
+[data-theme="light"] .bg-grid {
+    background-image:
+        linear-gradient(rgba(139, 92, 246, 0.07) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(139, 92, 246, 0.07) 1px, transparent 1px);
+}
+
+[data-theme="light"] .bg-orb-1 { background: rgba(139, 92, 246, 0.15); }
+[data-theme="light"] .bg-orb-2 { background: rgba(99, 102, 241, 0.12); }
+[data-theme="light"] .bg-orb-3 { background: rgba(34, 211, 238, 0.10); }
+
+[data-theme="light"] .form-group input,
+[data-theme="light"] .form-group select,
+[data-theme="light"] .form-group textarea {
+    background: rgba(255, 255, 255, 0.9);
+}
+
+/* ================================================
    RESET & BASE
    ================================================ */
 *, *::before, *::after {
@@ -61,6 +111,7 @@ body {
     line-height: 1.65;
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 ::selection {
@@ -136,6 +187,37 @@ img {
     0%, 100% { transform: translate(0, 0); }
     33% { transform: translate(30px, -40px); }
     66% { transform: translate(-20px, 30px); }
+}
+
+/* ================================================
+   THEME TOGGLE BUTTON
+   ================================================ */
+.theme-toggle {
+    width: 38px;
+    height: 38px;
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-sm);
+    background: var(--bg-card);
+    color: var(--text-secondary);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+}
+
+.theme-toggle:hover {
+    border-color: var(--border-active);
+    color: var(--accent-violet);
+    background: var(--bg-card-hover);
+    box-shadow: var(--shadow-glow);
+}
+
+.theme-toggle-placeholder {
+    width: 38px;
+    height: 38px;
+    flex-shrink: 0;
 }
 
 /* ================================================
