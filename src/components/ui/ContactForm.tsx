@@ -149,7 +149,7 @@ export default function ContactForm() {
           name="besoins"
           value={formData.besoins}
           onChange={handleChange}
-          placeholder="Décrivez les tâches que vous aimeriez automatiser ou le projet que vous avez en tête..."
+          placeholder="Décrivez votre projet ici ou bien enregistrez un message vocal en cliquant ci-dessous sur le bouton d'enregistrement."
           required={!audioBase64}
         />
       </div>
