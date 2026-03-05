@@ -4,9 +4,12 @@ export default function Footer() {
       <div className="container">
         <div className="footer-grid">
           <div className="footer-brand">
-            <a href="#" className="nav-logo">
-              <div className="nav-logo-icon">T</div>
-              <span>TAHITITECH</span>DIGITAL
+            <a href="#">
+              <img
+                src="/logo-ttd-full.png"
+                alt="TahitiTechDigital"
+                className="footer-logo-img"
+              />
             </a>
             <p>
               Automatisation IA et transformation digitale pour les entreprises polynésiennes.

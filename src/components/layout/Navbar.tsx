@@ -14,7 +14,13 @@ export default function Navbar() {
     <nav className={`navbar${isScrolled ? ' scrolled' : ''}`} id="navbar">
       <div className="container">
         <a href="#" className="nav-logo">
-          <div className="nav-logo-icon">T</div>
+          <img
+            src="/logo-ttd.png"
+            alt="TahitiTechDigital"
+            className="nav-logo-img"
+            width={84}
+            height={84}
+          />
           <span>TAHITITECH</span>DIGITAL
         </a>
 

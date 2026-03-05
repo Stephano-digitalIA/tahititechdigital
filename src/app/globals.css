@@ -251,30 +251,22 @@ img {
     align-items: center;
     gap: 12px;
     font-weight: 800;
-    font-size: 1.2rem;
-    color: var(--text-white);
+    font-size: 2.4rem;
+    color: var(--accent-cyan);
     letter-spacing: -0.02em;
 }
 
-.nav-logo-icon {
-    width: 40px;
-    height: 40px;
-    background: var(--gradient-main);
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.1rem;
-    font-weight: 900;
-    color: white;
-    box-shadow: 0 0 20px rgba(139,92,246,0.3);
+.nav-logo-img {
+    height: 84px;
+    width: auto;
+    flex-shrink: 0;
+    object-fit: contain;
 }
 
 .nav-logo span {
-    background: var(--gradient-main);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: var(--accent-cyan);
+    background: none;
+    -webkit-text-fill-color: var(--accent-cyan);
 }
 
 .nav-links {
@@ -1507,6 +1499,12 @@ section {
     grid-template-columns: 1.5fr 1fr 1fr 1fr;
     gap: 48px;
     margin-bottom: 48px;
+}
+
+.footer-logo-img {
+    height: 160px;
+    width: auto;
+    object-fit: contain;
 }
 
 .footer-brand p {
