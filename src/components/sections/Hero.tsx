@@ -42,8 +42,7 @@ export default function Hero() {
             <div className="hero-orbit hero-orbit-2"></div>
             <div className="hero-orbit hero-orbit-3"></div>
             <div className="hero-center-logo">
-              <span className="logo-ttd">TTD</span>
-              <span className="logo-sub">Digital</span>
+              <img src="/logo-ttd.png" alt="TahitiTechDigital" className="hero-center-logo-img" />
             </div>
             <div className="orbit-node orbit-node-1">🤖</div>
             <div className="orbit-node orbit-node-2">🛒</div>
