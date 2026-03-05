@@ -50,9 +50,9 @@ export default function Footer() {
         <div className="footer-bottom">
           <p>© 2025 TAHITITECHDIGITAL. Tous droits réservés.</p>
           <div className="footer-legal">
-            <a href="#">Politique de confidentialité</a>
-            <a href="#">Conditions d&#39;utilisation</a>
-            <a href="#">Conditions de vente</a>
+            <a href="/politique-confidentialite">Politique de confidentialité</a>
+            <a href="/conditions-utilisation">Conditions d&#39;utilisation</a>
+            <a href="/conditions-vente">Conditions de vente</a>
           </div>
         </div>
       </div>
