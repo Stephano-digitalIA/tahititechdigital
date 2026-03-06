@@ -10,7 +10,7 @@ export const SERVICES_DATA: ServiceCard[] = [
     description: "Automatisez vos processus métier avec n8n, Make et l'IA. De la facturation aux réponses clients, tout fonctionne en pilote automatique.",
     features: [
       'Workflows n8n sur mesure',
-      'Réponses automatiques IA (Airbnb, email)',
+      'Réponses automatiques IA (email, chat)',
       'Génération de documents automatisée',
       'Intégrations API & connecteurs',
     ],
@@ -67,27 +67,6 @@ export const METRICS_DATA: MetricCard[] = [
 ]
 
 export const SOLUTIONS_DATA: SolutionPanel[] = [
-  {
-    id: 'airbnb',
-    tabLabel: '🏠 Gestion Airbnb',
-    title: 'Gestion locative Airbnb automatisée',
-    description:
-      "Votre IA répond instantanément aux invités, gère les check-in/check-out et synchronise vos calendriers. Plus besoin de surveiller votre téléphone 24h/24.",
-    stats: [
-      { value: '100%', label: 'Temps gagné sur les réponses' },
-      { value: '4 jours', label: 'Mise en route' },
-    ],
-    ctaText: 'Automatiser ma gestion →',
-    mockupHtml: `<div class="mockup-line"><span class="comment">// Workflow Airbnb IA</span></div>
-<div class="mockup-line"><span class="keyword">trigger</span>: <span class="string">"nouveau_message_guest"</span></div>
-<div class="mockup-line"><span class="keyword">action</span>: <span class="func">analyserIA</span>(message)</div>
-<div class="mockup-line"><span class="keyword">if</span> type === <span class="string">"check-in"</span></div>
-<div class="mockup-line">&nbsp;&nbsp;<span class="func">envoyerInstructions</span>(guest)</div>
-<div class="mockup-line"><span class="keyword">else</span></div>
-<div class="mockup-line">&nbsp;&nbsp;<span class="func">réponsePersonnalisée</span>(guest)</div>
-<div class="mockup-line"><span class="comment">// Temps de réponse: &lt; 30 sec</span></div>
-<div class="mockup-line"><span class="keyword">status</span>: <span class="string">"✅ Envoyé"</span></div>`,
-  },
   {
     id: 'ecommerce',
     tabLabel: '🛒 E-commerce',

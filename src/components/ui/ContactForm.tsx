@@ -1,7 +1,6 @@
 'use client'
 
-import { useState, useCallback } from 'react'
-import AudioRecorder from '@/components/ui/AudioRecorder'
+import { useState } from 'react'
 
 interface FormData {
   prenom: string
@@ -15,7 +14,6 @@ interface FormData {
 export default function ContactForm() {
   const [submitted, setSubmitted] = useState(false)
   const [loading, setLoading] = useState(false)
-  const [audioBase64, setAudioBase64] = useState<string | null>(null)
   const [formData, setFormData] = useState<FormData>({
     prenom: '',
     nom: '',
@@ -24,10 +22,6 @@ export default function ContactForm() {
     secteur: '',
     besoins: '',
   })
-
-  const handleAudioChange = useCallback((base64: string | null) => {
-    setAudioBase64(base64)
-  }, [])
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
@@ -43,19 +37,17 @@ export default function ContactForm() {
       const res = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...formData, audioBase64 }),
+        body: JSON.stringify(formData),
       })
 
       if (res.ok) {
         setSubmitted(true)
         setTimeout(() => {
           setSubmitted(false)
-          setAudioBase64(null)
           setFormData({ prenom: '', nom: '', email: '', entreprise: '', secteur: '', besoins: '' })
         }, 3000)
       }
     } catch {
-      // Fallback: show success anyway (form is still client-side if API not configured)
       setSubmitted(true)
       setTimeout(() => setSubmitted(false), 3000)
     } finally {
@@ -143,18 +135,16 @@ export default function ContactForm() {
 
       <div className="form-group">
         <label>
-          Vos besoins {!audioBase64 && <span className="required">*</span>}
+          Vos besoins <span className="required">*</span>
         </label>
         <textarea
           name="besoins"
           value={formData.besoins}
           onChange={handleChange}
-          placeholder="Décrivez votre projet ici ou bien enregistrez un message vocal en cliquant ci-dessous sur le bouton d'enregistrement."
-          required={!audioBase64}
+          placeholder="Décrivez votre projet..."
+          required
         />
       </div>
-
-      <AudioRecorder onAudioChange={handleAudioChange} />
 
       <button
         type="submit"

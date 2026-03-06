@@ -4,7 +4,7 @@ import { useState } from 'react'
 import { SOLUTIONS_DATA } from '@/lib/data'
 
 export default function Solutions() {
-  const [activeTab, setActiveTab] = useState('airbnb')
+  const [activeTab, setActiveTab] = useState('ecommerce')
 
   return (
     <section id="solutions">
