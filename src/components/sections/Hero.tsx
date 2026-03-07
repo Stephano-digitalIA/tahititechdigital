@@ -1,4 +1,17 @@
+'use client'
+
+import { useRef } from 'react'
+
 export default function Hero() {
+  const iframeRef = useRef<HTMLIFrameElement>(null)
+
+  const enableInteraction = () => {
+    if (iframeRef.current) iframeRef.current.style.pointerEvents = 'auto'
+  }
+  const disableInteraction = () => {
+    if (iframeRef.current) iframeRef.current.style.pointerEvents = 'none'
+  }
+
   return (
     <section className="hero">
       <div className="container">
@@ -37,14 +50,20 @@ export default function Hero() {
         </div>
 
         <div className="hero-visual">
-          <div className="hero-spline-container spline-robot">
+          <div
+            className="hero-spline-container spline-robot"
+            onMouseEnter={enableInteraction}
+            onMouseLeave={disableInteraction}
+          >
             <iframe
+              ref={iframeRef}
               src="https://my.spline.design/genkubgreetingrobot-Cn9LkG2IKJdCanCcPNNxlxMS/"
               frameBorder="0"
               width="100%"
               height="100%"
               title="TahitiTechDigital 3D"
               allow="autoplay"
+              style={{ pointerEvents: 'none' }}
             />
           </div>
         </div>
