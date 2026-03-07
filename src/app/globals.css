@@ -512,7 +512,7 @@ img {
 .hero-visual {
     position: relative;
     display: flex;
-    justify-content: center;
+    justify-content: flex-end;
     align-items: center;
     animation: fadeInUp 1.2s ease-out 0.4s both;
 }
@@ -521,11 +521,16 @@ img {
     position: relative;
     overflow: hidden;
     border-radius: 20px;
+  width: 100%;
+    display: flex;
+    justify-content: flex-end;  
 }
 
 .spline-robot {
-    width: 40vw;
-    height: 70vh;
+    width: 48vw;
+    height: 78vh;
+    margin-left: auto;
+    display: block;
 }
 
 .hero-spline-container canvas {

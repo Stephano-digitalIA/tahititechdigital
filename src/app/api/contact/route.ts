@@ -12,19 +12,23 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'RESEND_API_KEY non configuré' }, { status: 500 })
     }
 
-    // Transcription audio via Whisper
+    // Transcription audio via Whisper (timeout 8s pour ne pas bloquer l'envoi)
     let transcription = ''
     if (audioBase64 && process.env.OPENAI_API_KEY) {
       try {
         const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY })
         const audioBuffer = Buffer.from(audioBase64 as string, 'base64')
         const audioFile = await toFile(audioBuffer, 'message-vocal.webm', { type: 'audio/webm' })
-        const result = await openai.audio.transcriptions.create({
+        const transcribePromise = openai.audio.transcriptions.create({
           file: audioFile,
           model: 'whisper-1',
           language: 'fr',
         })
-        transcription = result.text
+        const timeoutPromise = new Promise<null>((resolve) =>
+          setTimeout(() => resolve(null), 8000)
+        )
+        const result = await Promise.race([transcribePromise, timeoutPromise])
+        transcription = result ? result.text : '(transcription indisponible — fichier audio joint)'
       } catch {
         transcription = '(transcription indisponible)'
       }
