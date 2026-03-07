@@ -76,7 +76,7 @@ export default function ConditionsUtilisation() {
               <h2>8. Contact</h2>
               <p>
                 Pour toute question relative aux présentes conditions :{' '}
-                <a href="mailto:contact@tahititechdigital.com">contact@tahititechdigital.com</a>
+                <a href="mailto:contact@tahititechdigital.com?subject=Contact%20TahitiTechDigital">contact@tahititechdigital.com</a>
               </p>
             </section>
           </div>

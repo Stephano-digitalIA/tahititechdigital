@@ -22,7 +22,7 @@ export default function PolitiqueConfidentialite() {
                 Le responsable du traitement des données personnelles collectées sur ce site est :<br />
                 <strong>TahitiTechDigital</strong><br />
                 Polynésie française<br />
-                Email : <a href="mailto:contact@tahititechdigital.com">contact@tahititechdigital.com</a>
+                Email : <a href="mailto:contact@tahititechdigital.com?subject=Contact%20TahitiTechDigital">contact@tahititechdigital.com</a>
               </p>
             </section>
 
@@ -72,7 +72,7 @@ export default function PolitiqueConfidentialite() {
               </ul>
               <p>
                 Pour exercer ces droits, contactez-nous à :{' '}
-                <a href="mailto:contact@tahititechdigital.com">contact@tahititechdigital.com</a>
+                <a href="mailto:contact@tahititechdigital.com?subject=Contact%20TahitiTechDigital">contact@tahititechdigital.com</a>
               </p>
             </section>
 
@@ -94,7 +94,7 @@ export default function PolitiqueConfidentialite() {
               <h2>9. Contact</h2>
               <p>
                 Pour toute question relative à cette politique ou à vos données personnelles :<br />
-                <a href="mailto:contact@tahititechdigital.com">contact@tahititechdigital.com</a>
+                <a href="mailto:contact@tahititechdigital.com?subject=Contact%20TahitiTechDigital">contact@tahititechdigital.com</a>
               </p>
             </section>
           </div>

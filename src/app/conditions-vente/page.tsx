@@ -78,7 +78,7 @@ export default function ConditionsVente() {
               <h2>8. Droit de rétractation</h2>
               <p>
                 Conformément à la réglementation applicable, les clients particuliers disposent d'un délai de rétractation de <strong>14 jours</strong> à compter de la signature du devis, à condition que la prestation n'ait pas encore débuté. La rétractation doit être notifiée par écrit à l'adresse{' '}
-                <a href="mailto:contact@tahititechdigital.com">contact@tahititechdigital.com</a>.
+                <a href="mailto:contact@tahititechdigital.com?subject=Contact%20TahitiTechDigital">contact@tahititechdigital.com</a>.
                 Ce droit ne s'applique pas aux prestations déjà exécutées avec l'accord exprès du Client.
               </p>
             </section>
@@ -108,7 +108,7 @@ export default function ConditionsVente() {
               <h2>12. Contact</h2>
               <p>
                 Pour toute question relative aux présentes CGV :{' '}
-                <a href="mailto:contact@tahititechdigital.com">contact@tahititechdigital.com</a>
+                <a href="mailto:contact@tahititechdigital.com?subject=Contact%20TahitiTechDigital">contact@tahititechdigital.com</a>
               </p>
             </section>
           </div>
