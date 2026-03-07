@@ -37,13 +37,14 @@ export default function Hero() {
         </div>
 
         <div className="hero-visual">
-          <div className="hero-spline-container">
+          <div className="hero-spline-container spline-robot">
             <iframe
               src="https://my.spline.design/genkubgreetingrobot-Cn9LkG2IKJdCanCcPNNxlxMS/"
               frameBorder="0"
               width="100%"
               height="100%"
               title="TahitiTechDigital 3D"
+              allow="autoplay"
             />
           </div>
         </div>

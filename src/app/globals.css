@@ -517,6 +517,28 @@ img {
     animation: fadeInUp 1.2s ease-out 0.4s both;
 }
 
+.hero-spline-container {
+    position: relative;
+    overflow: hidden;
+    border-radius: 20px;
+}
+
+.spline-robot {
+    width: 40vw;
+    height: 70vh;
+}
+
+.hero-spline-container canvas {
+    border-radius: 20px;
+}
+
+.hero-spline-loading {
+    width: 500px;
+    height: 500px;
+    border-radius: 20px;
+    background: var(--bg-card);
+}
+
 .hero-graphic {
     position: relative;
     width: 100%;
