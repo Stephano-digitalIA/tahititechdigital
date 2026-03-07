@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import Link from 'next/link'
 import { useNavbarScroll } from '@/hooks/useNavbarScroll'
 import ThemeToggle from '@/components/ui/ThemeToggle'
 
@@ -13,7 +14,7 @@ export default function Navbar() {
   return (
     <nav className={`navbar${isScrolled ? ' scrolled' : ''}`} id="navbar">
       <div className="container">
-        <a href="/" className="nav-logo">
+        <Link href="/" className="nav-logo">
           <img
             src="/logo-ttd.png"
             alt="TahitiTechDigital"
@@ -22,17 +23,17 @@ export default function Navbar() {
             height={84}
           />
           <span>TAHITITECH</span>DIGITAL
-        </a>
+        </Link>
 
         <ul className={`nav-links${isMobileOpen ? ' open' : ''}`} id="navLinks">
-          <li><a href="/#services" onClick={closeMenu}>Services</a></li>
-          <li><a href="/#solutions" onClick={closeMenu}>Solutions</a></li>
-          <li><a href="/#about" onClick={closeMenu}>À propos</a></li>
-          <li><a href="/#faq" onClick={closeMenu}>FAQ</a></li>
-          <li><a href="/#contact" onClick={closeMenu}>Contact</a></li>
+          <li><Link href="/#services" onClick={closeMenu}>Services</Link></li>
+          <li><Link href="/#solutions" onClick={closeMenu}>Solutions</Link></li>
+          <li><Link href="/#about" onClick={closeMenu}>À propos</Link></li>
+          <li><Link href="/#faq" onClick={closeMenu}>FAQ</Link></li>
+          <li><Link href="/#contact" onClick={closeMenu}>Contact</Link></li>
         </ul>
 
-        <a href="/#contact" className="nav-cta">Démarrer un projet</a>
+        <Link href="/#contact" className="nav-cta">Démarrer un projet</Link>
 
         <ThemeToggle />
 
