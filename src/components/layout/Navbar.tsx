@@ -13,7 +13,7 @@ export default function Navbar() {
   return (
     <nav className={`navbar${isScrolled ? ' scrolled' : ''}`} id="navbar">
       <div className="container">
-        <a href="#" className="nav-logo">
+        <a href="/" className="nav-logo">
           <img
             src="/logo-ttd.png"
             alt="TahitiTechDigital"
@@ -25,14 +25,14 @@ export default function Navbar() {
         </a>
 
         <ul className={`nav-links${isMobileOpen ? ' open' : ''}`} id="navLinks">
-          <li><a href="#services" onClick={closeMenu}>Services</a></li>
-          <li><a href="#solutions" onClick={closeMenu}>Solutions</a></li>
-          <li><a href="#about" onClick={closeMenu}>À propos</a></li>
-          <li><a href="#faq" onClick={closeMenu}>FAQ</a></li>
-          <li><a href="#contact" onClick={closeMenu}>Contact</a></li>
+          <li><a href="/#services" onClick={closeMenu}>Services</a></li>
+          <li><a href="/#solutions" onClick={closeMenu}>Solutions</a></li>
+          <li><a href="/#about" onClick={closeMenu}>À propos</a></li>
+          <li><a href="/#faq" onClick={closeMenu}>FAQ</a></li>
+          <li><a href="/#contact" onClick={closeMenu}>Contact</a></li>
         </ul>
 
-        <a href="#contact" className="nav-cta">Démarrer un projet</a>
+        <a href="/#contact" className="nav-cta">Démarrer un projet</a>
 
         <ThemeToggle />
 

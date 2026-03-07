@@ -37,19 +37,14 @@ export default function Hero() {
         </div>
 
         <div className="hero-visual">
-          <div className="hero-graphic">
-            <div className="hero-orbit hero-orbit-1"></div>
-            <div className="hero-orbit hero-orbit-2"></div>
-            <div className="hero-orbit hero-orbit-3"></div>
-            <div className="hero-center-logo">
-              <img src="/logo-ttd.png" alt="TahitiTechDigital" className="hero-center-logo-img" />
-            </div>
-            <div className="orbit-node orbit-node-1">🤖</div>
-            <div className="orbit-node orbit-node-2">🛒</div>
-            <div className="orbit-node orbit-node-3">📊</div>
-            <div className="orbit-node orbit-node-4">⚡</div>
-            <div className="orbit-node orbit-node-5">🌐</div>
-            <div className="orbit-node orbit-node-6">🔧</div>
+          <div className="hero-spline-container">
+            <iframe
+              src="https://my.spline.design/genkubgreetingrobot-Cn9LkG2IKJdCanCcPNNxlxMS/"
+              frameBorder="0"
+              width="100%"
+              height="100%"
+              title="TahitiTechDigital 3D"
+            />
           </div>
         </div>
       </div>
