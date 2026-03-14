@@ -157,113 +157,298 @@
             box-shadow: 0 10px 30px rgba(17, 153, 142, 0.4);
         }
 
+        /* ── Storage / Product Manager Modal ── */
         .storage-modal {
             display: none;
             position: fixed;
             top: 0; left: 0;
             width: 100%; height: 100%;
-            background: rgba(0,0,0,0.7);
+            background: rgba(0,0,0,0.85);
             z-index: 1000;
             justify-content: center;
             align-items: center;
         }
-
         .storage-modal.active { display: flex; }
 
         .storage-modal-content {
-            background: #1a1f3a;
+            background: #111318;
             border-radius: 16px;
-            padding: 30px;
-            width: 90%;
-            max-width: 800px;
-            max-height: 80vh;
-            overflow-y: auto;
-            border: 1px solid rgba(102, 126, 234, 0.3);
+            width: 95%;
+            max-width: 1100px;
+            max-height: 90vh;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid rgba(255,255,255,0.08);
+            overflow: hidden;
         }
 
         .storage-modal-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 20px;
+            padding: 22px 28px;
+            border-bottom: 1px solid rgba(255,255,255,0.07);
+            flex-shrink: 0;
         }
 
         .storage-modal-title {
-            font-size: 1.3em;
+            font-size: 1.15em;
             font-weight: 700;
-            color: #38ef7d;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
-        .storage-section {
-            margin-bottom: 20px;
+        .storage-toolbar {
+            display: flex;
+            gap: 10px;
+            padding: 16px 28px;
+            border-bottom: 1px solid rgba(255,255,255,0.07);
+            flex-shrink: 0;
+            flex-wrap: wrap;
         }
 
-        .storage-section h3 {
-            color: #a0aec0;
+        .storage-search {
+            flex: 1;
+            min-width: 200px;
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 8px;
+            color: #fff;
+            padding: 9px 14px;
+            font-size: 0.9em;
+            outline: none;
+        }
+        .storage-search::placeholder { color: #666; }
+        .storage-search:focus { border-color: rgba(255,255,255,0.25); }
+
+        .storage-cat-filter {
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 8px;
+            color: #fff;
+            padding: 9px 14px;
+            font-size: 0.9em;
+            outline: none;
+            cursor: pointer;
+        }
+
+        .storage-btn-new {
+            background: #d4a017;
+            border: none;
+            border-radius: 8px;
+            color: #000;
+            padding: 9px 18px;
+            font-size: 0.9em;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: opacity 0.2s;
+        }
+        .storage-btn-new:hover { opacity: 0.85; }
+
+        .storage-btn-export {
+            background: rgba(255,255,255,0.07);
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 8px;
+            color: #ccc;
+            padding: 9px 14px;
             font-size: 0.85em;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 8px;
+            cursor: pointer;
+            transition: background 0.2s;
         }
+        .storage-btn-export:hover { background: rgba(255,255,255,0.12); }
 
-        .storage-key {
-            background: rgba(255,255,255,0.05);
-            border-radius: 10px;
-            padding: 12px 16px;
-            margin-bottom: 8px;
-            border-left: 3px solid #667eea;
+        .storage-btn-danger {
+            background: rgba(229,62,62,0.15);
+            border: 1px solid rgba(229,62,62,0.3);
+            border-radius: 8px;
+            color: #fc8181;
+            padding: 9px 14px;
+            font-size: 0.85em;
+            cursor: pointer;
+            transition: background 0.2s;
         }
+        .storage-btn-danger:hover { background: rgba(229,62,62,0.25); }
 
-        .storage-key-name {
-            font-size: 0.8em;
-            color: #7ee787;
-            font-family: monospace;
-            margin-bottom: 4px;
-        }
-
-        .storage-key-value {
-            font-size: 0.75em;
-            color: #e2e8f0;
-            font-family: monospace;
-            word-break: break-all;
-            white-space: pre-wrap;
-            max-height: 150px;
+        .storage-table-wrap {
             overflow-y: auto;
+            flex: 1;
         }
 
-        .storage-key-size {
-            font-size: 0.7em;
-            color: #a0aec0;
-            margin-top: 4px;
+        .storage-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.88em;
+        }
+
+        .storage-table thead th {
+            padding: 11px 16px;
+            color: #666;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.75em;
+            letter-spacing: 0.5px;
+            text-align: left;
+            border-bottom: 1px solid rgba(255,255,255,0.07);
+            position: sticky;
+            top: 0;
+            background: #111318;
+        }
+
+        .storage-table tbody tr {
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            transition: background 0.15s;
+        }
+        .storage-table tbody tr:hover { background: rgba(255,255,255,0.03); }
+
+        .storage-table td {
+            padding: 13px 16px;
+            vertical-align: middle;
+            color: #e2e8f0;
+        }
+
+        .st-product-cell {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .st-icon-box {
+            width: 38px;
+            height: 38px;
+            background: rgba(255,255,255,0.07);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3em;
+            flex-shrink: 0;
+        }
+
+        .st-product-name {
+            font-weight: 600;
+            color: #fff;
+            line-height: 1.3;
+        }
+
+        .st-product-id {
+            font-size: 0.75em;
+            color: #555;
+            font-family: monospace;
+        }
+
+        .st-badge {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 0.78em;
+            font-weight: 600;
+            background: rgba(255,255,255,0.08);
+            color: #aaa;
+        }
+
+        .st-tag {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 0.75em;
+            background: rgba(102,126,234,0.2);
+            color: #9ab0ff;
+            margin: 2px;
+        }
+
+        .st-action-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 6px 8px;
+            border-radius: 6px;
+            transition: background 0.15s;
+            font-size: 1em;
+            color: #aaa;
+        }
+        .st-action-btn:hover { background: rgba(255,255,255,0.1); color: #fff; }
+        .st-action-btn.danger:hover { background: rgba(229,62,62,0.15); color: #fc8181; }
+
+        /* Inline edit row */
+        .storage-edit-row td {
+            background: #16191f;
+            padding: 16px;
+        }
+        .storage-edit-grid {
+            display: grid;
+            grid-template-columns: 60px 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+        .storage-edit-grid-full {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+        .st-input-group label {
+            display: block;
+            font-size: 0.72em;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 5px;
+        }
+        .st-input {
+            width: 100%;
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 7px;
+            color: #fff;
+            padding: 7px 10px;
+            font-size: 0.88em;
+            box-sizing: border-box;
+            outline: none;
+        }
+        .st-input:focus { border-color: #d4a017; }
+        .st-textarea {
+            resize: vertical;
+            min-height: 56px;
+        }
+        .st-select {
+            background: #1a1d26;
+            cursor: pointer;
+        }
+        .st-edit-actions {
+            display: flex;
+            gap: 8px;
+        }
+        .st-save-btn {
+            background: #d4a017;
+            border: none;
+            border-radius: 7px;
+            color: #000;
+            padding: 7px 18px;
+            font-weight: 700;
+            font-size: 0.85em;
+            cursor: pointer;
+        }
+        .st-cancel-btn {
+            background: rgba(255,255,255,0.07);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 7px;
+            color: #aaa;
+            padding: 7px 14px;
+            font-size: 0.85em;
+            cursor: pointer;
         }
 
         .storage-empty {
             text-align: center;
-            color: #a0aec0;
-            padding: 20px;
+            color: #555;
+            padding: 40px 20px;
+            font-size: 0.95em;
         }
-
-        .storage-actions {
-            display: flex;
-            gap: 10px;
-            margin-top: 20px;
-            flex-wrap: wrap;
-        }
-
-        .storage-action-btn {
-            padding: 8px 16px;
-            border-radius: 20px;
-            border: none;
-            cursor: pointer;
-            font-size: 0.85em;
-            font-weight: 600;
-            transition: all 0.2s;
-        }
-
-        .btn-export { background: #667eea; color: white; }
-        .btn-clear { background: #e53e3e; color: white; }
-        .btn-refresh { background: #38a169; color: white; }
-        .storage-action-btn:hover { opacity: 0.85; transform: translateY(-1px); }
 
         /* Filter Tags */
         .filters {
@@ -796,14 +981,42 @@
     <div class="storage-modal" id="storageModal">
         <div class="storage-modal-content">
             <div class="storage-modal-header">
-                <div class="storage-modal-title">🗄️ Inspection du LocalStorage</div>
+                <div class="storage-modal-title">
+                    <span style="font-size:1.1em;">📦</span>
+                    Gestion des Produits
+                </div>
                 <button class="close-btn" onclick="closeStorageModal()">×</button>
             </div>
-            <div id="storageContent"></div>
-            <div class="storage-actions">
-                <button class="storage-action-btn btn-refresh" onclick="refreshStorageModal()">🔄 Rafraîchir</button>
-                <button class="storage-action-btn btn-export" onclick="exportStorage()">📥 Exporter JSON</button>
-                <button class="storage-action-btn btn-clear" onclick="clearStorage()">🗑️ Vider le LocalStorage</button>
+            <div class="storage-toolbar">
+                <input class="storage-search" id="storageSearch" type="text" placeholder="Rechercher un produit..." oninput="filterStorageTable()">
+                <select class="storage-cat-filter st-input st-select" id="storageCatFilter" onchange="filterStorageTable()" style="width:auto;">
+                    <option value="">Toutes les catégories</option>
+                    <option value="outils">Outils & Guides</option>
+                    <option value="automation">Automatisation</option>
+                    <option value="documentation">Documentation</option>
+                    <option value="siteweb">Site Web</option>
+                    <option value="devis">Devis</option>
+                    <option value="factures">Factures</option>
+                    <option value="cybersecurite">Cybersécurité</option>
+                </select>
+                <button class="storage-btn-export" onclick="exportStorage()">📥 Exporter JSON</button>
+                <button class="storage-btn-danger" onclick="clearStorage()">🗑️ Tout vider</button>
+            </div>
+            <div class="storage-table-wrap">
+                <table class="storage-table">
+                    <thead>
+                        <tr>
+                            <th>Produit</th>
+                            <th>Catégorie</th>
+                            <th>Type</th>
+                            <th>Tags</th>
+                            <th>Date</th>
+                            <th style="text-align:right;">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="storageTableBody"></tbody>
+                </table>
+                <div id="storageEmpty" class="storage-empty" style="display:none;">Aucun produit trouvé.</div>
             </div>
         </div>
     </div>
@@ -1825,6 +2038,7 @@
             
             // Message de confirmation
             showSuccessMessage(`🗑️ Le produit "${product.name}" a été supprimé avec succès.`);
+            if (document.getElementById('storageModal').classList.contains('active')) refreshStorageModal();
         }
 
         // Close modals on ESC key
@@ -1836,8 +2050,12 @@
             }
         });
 
+        const CATEGORIES = ['outils','automation','documentation','siteweb','devis','factures','cybersecurite'];
+
         function openStorageModal() {
             document.getElementById('storageModal').classList.add('active');
+            document.getElementById('storageSearch').value = '';
+            document.getElementById('storageCatFilter').value = '';
             refreshStorageModal();
         }
 
@@ -1846,77 +2064,113 @@
         }
 
         function refreshStorageModal() {
-            const container = document.getElementById('storageContent');
+            renderStorageTable(products);
+        }
 
-            if (products.length === 0) {
-                container.innerHTML = '<div class="storage-empty">Aucun produit dans le LocalStorage.</div>';
+        function filterStorageTable() {
+            const q = document.getElementById('storageSearch').value.toLowerCase();
+            const cat = document.getElementById('storageCatFilter').value;
+            const filtered = products.filter(p => {
+                const matchCat = !cat || p.category === cat;
+                const matchQ = !q || p.name.toLowerCase().includes(q) || (p.tags||[]).join(' ').toLowerCase().includes(q);
+                return matchCat && matchQ;
+            });
+            renderStorageTable(filtered);
+        }
+
+        function renderStorageTable(list) {
+            const tbody = document.getElementById('storageTableBody');
+            const empty = document.getElementById('storageEmpty');
+
+            if (list.length === 0) {
+                tbody.innerHTML = '';
+                empty.style.display = 'block';
                 return;
             }
+            empty.style.display = 'none';
 
-            const categoryOptions = [
-                'outils', 'automation', 'documentation', 'siteweb', 'devis', 'factures', 'cybersecurite'
-            ].map(c => `<option value="${c}">${getCategoryLabel(c)}</option>`).join('');
+            const catOptions = CATEGORIES.map(c =>
+                `<option value="${c}">${getCategoryLabel(c)}</option>`
+            ).join('');
 
-            let html = `<div class="storage-section"><h3>${products.length} produit(s)</h3>`;
-
-            products.forEach(product => {
-                html += `
-                <div class="storage-key" id="storage-product-${product.id}">
-                    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
-                        <div style="display:flex;align-items:center;gap:8px;">
-                            <input type="text" value="${product.icon}" id="icon-${product.id}"
-                                style="width:50px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);border-radius:8px;color:white;padding:4px 6px;text-align:center;font-size:1.2em;">
-                            <span style="color:#a0aec0;font-size:0.75em;font-family:monospace;">${product.id}</span>
+            tbody.innerHTML = list.map(p => {
+                const tagsHtml = (p.tags||[]).map(t => `<span class="st-tag">${t}</span>`).join('');
+                const typeLabel = p.type === 'url' ? '🔗 URL' : '📁 Fichier';
+                return `
+                <tr id="row-${p.id}">
+                    <td>
+                        <div class="st-product-cell">
+                            <div class="st-icon-box">${p.icon}</div>
+                            <div>
+                                <div class="st-product-name">${p.name}</div>
+                                <div class="st-product-id">${p.id}</div>
+                            </div>
                         </div>
-                        <button onclick="deleteProduct('${product.id}')" style="background:#e53e3e;border:none;border-radius:8px;color:white;padding:4px 10px;cursor:pointer;font-size:0.8em;">🗑️ Supprimer</button>
-                    </div>
-                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px;">
-                        <div>
-                            <label style="color:#a0aec0;font-size:0.75em;display:block;margin-bottom:4px;">Nom</label>
-                            <input type="text" value="${product.name.replace(/"/g, '&quot;')}" id="name-${product.id}"
-                                style="width:100%;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);border-radius:8px;color:white;padding:6px 10px;box-sizing:border-box;">
+                    </td>
+                    <td><span class="st-badge">${getCategoryLabel(p.category)}</span></td>
+                    <td style="color:#888;font-size:0.85em;">${typeLabel}</td>
+                    <td>${tagsHtml}</td>
+                    <td style="color:#666;font-size:0.82em;">${p.date || '—'}</td>
+                    <td style="text-align:right;white-space:nowrap;">
+                        <button class="st-action-btn" onclick="toggleStorageEdit('${p.id}')" title="Modifier">✏️</button>
+                        <button class="st-action-btn danger" onclick="deleteProduct('${p.id}');refreshStorageModal();" title="Supprimer">🗑️</button>
+                    </td>
+                </tr>
+                <tr id="editrow-${p.id}" class="storage-edit-row" style="display:none;">
+                    <td colspan="6">
+                        <div class="storage-edit-grid">
+                            <div class="st-input-group">
+                                <label>Icône</label>
+                                <input class="st-input" id="edit-icon-${p.id}" value="${p.icon}" style="text-align:center;font-size:1.2em;">
+                            </div>
+                            <div class="st-input-group">
+                                <label>Nom</label>
+                                <input class="st-input" id="edit-name-${p.id}" value="${p.name.replace(/"/g,'&quot;')}">
+                            </div>
+                            <div class="st-input-group">
+                                <label>Catégorie</label>
+                                <select class="st-input st-select" id="edit-cat-${p.id}">
+                                    ${catOptions.replace(`value="${p.category}"`,`value="${p.category}" selected`)}
+                                </select>
+                            </div>
                         </div>
-                        <div>
-                            <label style="color:#a0aec0;font-size:0.75em;display:block;margin-bottom:4px;">Catégorie</label>
-                            <select id="category-${product.id}"
-                                style="width:100%;background:#1a1f3a;border:1px solid rgba(255,255,255,0.15);border-radius:8px;color:white;padding:6px 10px;box-sizing:border-box;">
-                                ${categoryOptions.replace(`value="${product.category}"`, `value="${product.category}" selected`)}
-                            </select>
+                        <div class="storage-edit-grid-full">
+                            <div class="st-input-group">
+                                <label>Description</label>
+                                <textarea class="st-input st-textarea" id="edit-desc-${p.id}">${p.description}</textarea>
+                            </div>
+                            <div class="st-input-group">
+                                <label>Tags (séparés par des virgules)</label>
+                                <input class="st-input" id="edit-tags-${p.id}" value="${(p.tags||[]).join(', ')}">
+                            </div>
                         </div>
-                    </div>
-                    <div style="margin-bottom:10px;">
-                        <label style="color:#a0aec0;font-size:0.75em;display:block;margin-bottom:4px;">Description</label>
-                        <textarea id="desc-${product.id}" rows="2"
-                            style="width:100%;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);border-radius:8px;color:white;padding:6px 10px;box-sizing:border-box;resize:vertical;">${product.description}</textarea>
-                    </div>
-                    <div style="margin-bottom:10px;">
-                        <label style="color:#a0aec0;font-size:0.75em;display:block;margin-bottom:4px;">Tags (séparés par des virgules)</label>
-                        <input type="text" value="${product.tags.join(', ')}" id="tags-${product.id}"
-                            style="width:100%;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);border-radius:8px;color:white;padding:6px 10px;box-sizing:border-box;">
-                    </div>
-                    <button onclick="saveProductEdit('${product.id}')"
-                        style="background:linear-gradient(135deg,#11998e,#38ef7d);border:none;border-radius:20px;color:white;padding:8px 20px;cursor:pointer;font-weight:600;font-size:0.85em;">
-                        💾 Sauvegarder
-                    </button>
-                </div>`;
-            });
+                        <div class="st-edit-actions">
+                            <button class="st-save-btn" onclick="saveProductEdit('${p.id}')">💾 Sauvegarder</button>
+                            <button class="st-cancel-btn" onclick="toggleStorageEdit('${p.id}')">Annuler</button>
+                        </div>
+                    </td>
+                </tr>`;
+            }).join('');
+        }
 
-            html += `</div>`;
-            container.innerHTML = html;
+        function toggleStorageEdit(productId) {
+            const row = document.getElementById(`editrow-${productId}`);
+            row.style.display = row.style.display === 'none' ? 'table-row' : 'none';
         }
 
         function saveProductEdit(productId) {
             const idx = products.findIndex(p => p.id === productId);
             if (idx === -1) return;
 
-            products[idx].icon        = document.getElementById(`icon-${productId}`).value.trim();
-            products[idx].name        = document.getElementById(`name-${productId}`).value.trim();
-            products[idx].category    = document.getElementById(`category-${productId}`).value;
-            products[idx].description = document.getElementById(`desc-${productId}`).value.trim();
-            products[idx].tags        = document.getElementById(`tags-${productId}`).value.split(',').map(t => t.trim()).filter(Boolean);
+            products[idx].icon        = document.getElementById(`edit-icon-${productId}`).value.trim();
+            products[idx].name        = document.getElementById(`edit-name-${productId}`).value.trim();
+            products[idx].category    = document.getElementById(`edit-cat-${productId}`).value;
+            products[idx].description = document.getElementById(`edit-desc-${productId}`).value.trim();
+            products[idx].tags        = document.getElementById(`edit-tags-${productId}`).value.split(',').map(t => t.trim()).filter(Boolean);
 
             saveProducts();
             renderProducts();
+            refreshStorageModal();
             showSuccessMessage(`✅ Produit "${products[idx].name}" mis à jour.`);
         }
 
