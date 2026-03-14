@@ -683,6 +683,9 @@
             <div class="filter-tag" data-category="factures" onclick="filterByCategory('factures')">
                 Factures
             </div>
+            <div class="filter-tag" data-category="cybersecurite" onclick="filterByCategory('cybersecurite')">
+                Cybersécurité
+            </div>
         </div>
 
         <!-- Cards Grid -->
@@ -852,6 +855,7 @@
                     <option value="siteweb">🌐 Site Web</option>
                     <option value="devis">📄 Devis</option>
                     <option value="factures">💰 Factures</option>
+                    <option value="cybersecurite">🔒 Cybersécurité</option>
                 </select>
                 <small style="color: #a0aec0; font-size: 0.8em; margin-top: 5px; display: block;">
                     Choisissez la catégorie correspondant à votre produit
@@ -1014,7 +1018,8 @@
                 'documentation': 'Documentation',
                 'siteweb': 'Site Web',
                 'devis': 'Devis',
-                'factures': 'Factures'
+                'factures': 'Factures',
+                'cybersecurite': 'Cybersécurité'
             };
             return labels[category] || category;
         }
