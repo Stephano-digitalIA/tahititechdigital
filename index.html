@@ -1847,36 +1847,77 @@
 
         function refreshStorageModal() {
             const container = document.getElementById('storageContent');
-            const keys = Object.keys(localStorage);
 
-            if (keys.length === 0) {
-                container.innerHTML = '<div class="storage-empty">LocalStorage vide.</div>';
+            if (products.length === 0) {
+                container.innerHTML = '<div class="storage-empty">Aucun produit dans le LocalStorage.</div>';
                 return;
             }
 
-            let totalSize = 0;
-            let html = `<div class="storage-section"><h3>${keys.length} clé(s) trouvée(s)</h3>`;
+            const categoryOptions = [
+                'outils', 'automation', 'documentation', 'siteweb', 'devis', 'factures', 'cybersecurite'
+            ].map(c => `<option value="${c}">${getCategoryLabel(c)}</option>`).join('');
 
-            keys.forEach(key => {
-                const value = localStorage.getItem(key);
-                const size = new Blob([value]).size;
-                totalSize += size;
-                let displayValue = value;
-                try {
-                    displayValue = JSON.stringify(JSON.parse(value), null, 2);
-                } catch(e) {}
+            let html = `<div class="storage-section"><h3>${products.length} produit(s)</h3>`;
 
+            products.forEach(product => {
                 html += `
-                    <div class="storage-key">
-                        <div class="storage-key-name">${key}</div>
-                        <div class="storage-key-value">${displayValue}</div>
-                        <div class="storage-key-size">${(size / 1024).toFixed(2)} KB</div>
-                    </div>`;
+                <div class="storage-key" id="storage-product-${product.id}">
+                    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+                        <div style="display:flex;align-items:center;gap:8px;">
+                            <input type="text" value="${product.icon}" id="icon-${product.id}"
+                                style="width:50px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);border-radius:8px;color:white;padding:4px 6px;text-align:center;font-size:1.2em;">
+                            <span style="color:#a0aec0;font-size:0.75em;font-family:monospace;">${product.id}</span>
+                        </div>
+                        <button onclick="deleteProduct('${product.id}')" style="background:#e53e3e;border:none;border-radius:8px;color:white;padding:4px 10px;cursor:pointer;font-size:0.8em;">🗑️ Supprimer</button>
+                    </div>
+                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px;">
+                        <div>
+                            <label style="color:#a0aec0;font-size:0.75em;display:block;margin-bottom:4px;">Nom</label>
+                            <input type="text" value="${product.name.replace(/"/g, '&quot;')}" id="name-${product.id}"
+                                style="width:100%;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);border-radius:8px;color:white;padding:6px 10px;box-sizing:border-box;">
+                        </div>
+                        <div>
+                            <label style="color:#a0aec0;font-size:0.75em;display:block;margin-bottom:4px;">Catégorie</label>
+                            <select id="category-${product.id}"
+                                style="width:100%;background:#1a1f3a;border:1px solid rgba(255,255,255,0.15);border-radius:8px;color:white;padding:6px 10px;box-sizing:border-box;">
+                                ${categoryOptions.replace(`value="${product.category}"`, `value="${product.category}" selected`)}
+                            </select>
+                        </div>
+                    </div>
+                    <div style="margin-bottom:10px;">
+                        <label style="color:#a0aec0;font-size:0.75em;display:block;margin-bottom:4px;">Description</label>
+                        <textarea id="desc-${product.id}" rows="2"
+                            style="width:100%;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);border-radius:8px;color:white;padding:6px 10px;box-sizing:border-box;resize:vertical;">${product.description}</textarea>
+                    </div>
+                    <div style="margin-bottom:10px;">
+                        <label style="color:#a0aec0;font-size:0.75em;display:block;margin-bottom:4px;">Tags (séparés par des virgules)</label>
+                        <input type="text" value="${product.tags.join(', ')}" id="tags-${product.id}"
+                            style="width:100%;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);border-radius:8px;color:white;padding:6px 10px;box-sizing:border-box;">
+                    </div>
+                    <button onclick="saveProductEdit('${product.id}')"
+                        style="background:linear-gradient(135deg,#11998e,#38ef7d);border:none;border-radius:20px;color:white;padding:8px 20px;cursor:pointer;font-weight:600;font-size:0.85em;">
+                        💾 Sauvegarder
+                    </button>
+                </div>`;
             });
 
-            html += `<div style="color:#a0aec0;font-size:0.8em;margin-top:10px;">Total : ${(totalSize / 1024).toFixed(2)} KB</div>`;
             html += `</div>`;
             container.innerHTML = html;
+        }
+
+        function saveProductEdit(productId) {
+            const idx = products.findIndex(p => p.id === productId);
+            if (idx === -1) return;
+
+            products[idx].icon        = document.getElementById(`icon-${productId}`).value.trim();
+            products[idx].name        = document.getElementById(`name-${productId}`).value.trim();
+            products[idx].category    = document.getElementById(`category-${productId}`).value;
+            products[idx].description = document.getElementById(`desc-${productId}`).value.trim();
+            products[idx].tags        = document.getElementById(`tags-${productId}`).value.split(',').map(t => t.trim()).filter(Boolean);
+
+            saveProducts();
+            renderProducts();
+            showSuccessMessage(`✅ Produit "${products[idx].name}" mis à jour.`);
         }
 
         function exportStorage() {
