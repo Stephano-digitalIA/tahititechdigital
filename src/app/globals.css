@@ -742,7 +742,6 @@ section {
 .service-icon.blue { background: rgba(8,145,178,0.12); border: 1px solid rgba(8,145,178,0.2); }
 .service-icon.cyan { background: rgba(34,211,238,0.12); border: 1px solid rgba(34,211,238,0.2); }
 .service-icon.pink { background: rgba(236,72,153,0.12); border: 1px solid rgba(236,72,153,0.2); }
-.service-icon.green { background: rgba(34,197,94,0.12); border: 1px solid rgba(34,197,94,0.2); }
 
 .service-card h3 {
     font-size: 1.2rem;

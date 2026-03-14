@@ -1,7 +1,7 @@
 export interface ServiceCard {
   id: string
   icon: string
-  colorVariant: 'violet' | 'blue' | 'cyan' | 'pink' | 'green'
+  colorVariant: 'violet' | 'blue' | 'cyan' | 'pink'
   title: string
   tag: string
   description: string

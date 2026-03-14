@@ -57,20 +57,6 @@ export const SERVICES_DATA: ServiceCard[] = [
       'Gestion du changement',
     ],
   },
-  {
-    id: 'cybersecurity',
-    icon: '🔒',
-    colorVariant: 'green',
-    title: 'Cybersécurité',
-    tag: 'Protection · Audit · Conformité',
-    description: 'Protégez votre entreprise contre les cybermenaces avec des audits de sécurité, des tests de pénétration et des solutions de protection adaptées aux PME polynésiennes.',
-    features: [
-      'Audit de sécurité & tests de pénétration',
-      'Protection contre les ransomwares & phishing',
-      'Mise en conformité RGPD & politiques de sécurité',
-      'Formation & sensibilisation des équipes',
-    ],
-  },
 ]
 
 export const METRICS_DATA: MetricCard[] = [
