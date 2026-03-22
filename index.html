@@ -1862,24 +1862,21 @@
                 };
                 reader.readAsText(file);
             } else {
-                // Pour les autres fichiers (PDF, images, etc.), stocker le chemin et les infos
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    uploadedFiles.temp = e.target.result; // Base64 pour les fichiers binaires
-                    uploadedFiles.tempType = 'file';
-                    uploadedFiles.tempFileType = fileType || 'binary';
-                    uploadedFiles.tempFileName = fileName;
-                    fileLoading = false;
-                    document.getElementById('fileInfo').style.display = 'block';
-                    document.getElementById('fileName').textContent = fileName;
+                // Pour les fichiers binaires (PDF, images, etc.) : blob URL synchrone
+                // évite les problèmes de mémoire et de null result avec readAsDataURL
+                const blobUrl = URL.createObjectURL(file);
+                uploadedFiles.temp = blobUrl;
+                uploadedFiles.tempType = 'file';
+                uploadedFiles.tempFileType = fileType || 'binary';
+                uploadedFiles.tempFileName = fileName;
+                fileLoading = false;
+                document.getElementById('fileInfo').style.display = 'block';
+                document.getElementById('fileName').textContent = fileName;
 
-                    // Auto-fill product name from filename
-                    if (!document.getElementById('productName').value) {
-                        const nameWithoutExt = fileName.replace(/\.[^/.]+$/, '');
-                        document.getElementById('productName').value = nameWithoutExt;
-                    }
-                };
-                reader.readAsDataURL(file);
+                if (!document.getElementById('productName').value) {
+                    const nameWithoutExt = fileName.replace(/\.[^/.]+$/, '');
+                    document.getElementById('productName').value = nameWithoutExt;
+                }
             }
         }
 
