@@ -1259,6 +1259,7 @@
         let products = [];
         let uploadedFiles = {};
         let currentUploadMode = 'file'; // 'file' or 'url'
+        let fileLoading = false;
 
         // Load products from localStorage on page load
         window.addEventListener('DOMContentLoaded', function() {
@@ -1833,20 +1834,23 @@
             const fileType = file.type;
             const fileName = file.name;
             const fileExtension = fileName.split('.').pop().toLowerCase();
-            
+
+            fileLoading = true;
+
             // Pour les fichiers texte/HTML, lire le contenu
-            if (fileType.includes('text') || fileType.includes('html') || 
-                fileExtension === 'html' || fileExtension === 'htm' || 
+            if (fileType.includes('text') || fileType.includes('html') ||
+                fileExtension === 'html' || fileExtension === 'htm' ||
                 fileExtension === 'txt' || fileExtension === 'md' ||
                 fileExtension === 'json' || fileExtension === 'xml' ||
                 fileExtension === 'css' || fileExtension === 'js') {
-                
+
                 const reader = new FileReader();
                 reader.onload = function(e) {
                     uploadedFiles.temp = e.target.result;
                     uploadedFiles.tempType = 'file';
                     uploadedFiles.tempFileType = 'text';
                     uploadedFiles.tempFileName = fileName;
+                    fileLoading = false;
                     document.getElementById('fileInfo').style.display = 'block';
                     document.getElementById('fileName').textContent = fileName;
                     
@@ -1865,9 +1869,10 @@
                     uploadedFiles.tempType = 'file';
                     uploadedFiles.tempFileType = fileType || 'binary';
                     uploadedFiles.tempFileName = fileName;
+                    fileLoading = false;
                     document.getElementById('fileInfo').style.display = 'block';
                     document.getElementById('fileName').textContent = fileName;
-                    
+
                     // Auto-fill product name from filename
                     if (!document.getElementById('productName').value) {
                         const nameWithoutExt = fileName.replace(/\.[^/.]+$/, '');
@@ -1904,11 +1909,18 @@
                 return;
             }
             
+            if (fileLoading) {
+                alert('⏳ Le fichier est encore en cours de chargement. Patientez quelques secondes puis réessayez.');
+                return;
+            }
+
             if (!uploadedFiles.temp) {
                 if (currentUploadMode === 'file') {
                     alert('⚠️ Veuillez sélectionner un fichier à uploader.');
-                } else {
-                    alert('⚠️ Veuillez valider le lien URL.');
+                } else if (currentUploadMode === 'url') {
+                    alert('⚠️ Veuillez coller un lien URL et cliquer sur "Valider le lien".');
+                } else if (currentUploadMode === 'gdrive') {
+                    alert('⚠️ Veuillez sélectionner un fichier depuis Google Drive.');
                 }
                 return;
             }
