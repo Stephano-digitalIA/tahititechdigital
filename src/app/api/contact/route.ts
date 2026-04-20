@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server'
 import { Resend } from 'resend'
 import OpenAI from 'openai'
 import { toFile } from 'openai'
+import { getSupabaseAdmin } from '@/lib/supabase'
 
 export async function POST(request: Request) {
   try {
@@ -10,6 +11,22 @@ export async function POST(request: Request) {
 
     if (!process.env.RESEND_API_KEY) {
       return NextResponse.json({ error: 'RESEND_API_KEY non configuré' }, { status: 500 })
+    }
+
+    const supabase = getSupabaseAdmin()
+    if (supabase) {
+      const { error: dbError } = await supabase.from('contacts').insert({
+        prenom,
+        nom,
+        email,
+        entreprise,
+        secteur: secteur || null,
+        message: besoins || null,
+        created_at: new Date().toISOString(),
+      })
+      if (dbError) {
+        console.error('Supabase insert failed:', dbError)
+      }
     }
 
     // Transcription audio via Whisper (timeout 8s pour ne pas bloquer l'envoi)

@@ -43,19 +43,23 @@ export default function ContactForm() {
       if (res.ok) {
         const webhookUrl = process.env.NEXT_PUBLIC_N8N_WEBHOOK_URL
         if (webhookUrl) {
-          fetch(webhookUrl, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              prenom: formData.prenom,
-              nom: formData.nom,
-              email: formData.email,
-              entreprise: formData.entreprise,
-              secteur: formData.secteur,
-              message: formData.besoins,
-              date_soumission: new Date().toISOString(),
-            }),
-          }).catch(() => {})
+          try {
+            await fetch(webhookUrl, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                prenom: formData.prenom,
+                nom: formData.nom,
+                email: formData.email,
+                entreprise: formData.entreprise,
+                secteur: formData.secteur,
+                message: formData.besoins,
+                date_soumission: new Date().toISOString(),
+              }),
+            })
+          } catch (err) {
+            console.error('Webhook n8n failed:', err)
+          }
         }
 
         setSubmitted(true)
