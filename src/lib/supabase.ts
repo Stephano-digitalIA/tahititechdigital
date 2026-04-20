@@ -2,15 +2,15 @@ import { createClient, SupabaseClient } from '@supabase/supabase-js'
 
 let cached: SupabaseClient | null = null
 
-export function getSupabaseAdmin(): SupabaseClient | null {
+export function getSupabaseClient(): SupabaseClient | null {
   if (cached) return cached
 
-  const url = process.env.SUPABASE_URL
-  const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL
+  const anonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
 
-  if (!url || !serviceKey) return null
+  if (!url || !anonKey) return null
 
-  cached = createClient(url, serviceKey, {
+  cached = createClient(url, anonKey, {
     auth: { persistSession: false, autoRefreshToken: false },
   })
   return cached

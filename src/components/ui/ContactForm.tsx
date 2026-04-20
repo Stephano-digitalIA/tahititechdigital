@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import { getSupabaseClient } from '@/lib/supabase'
 
 interface FormData {
   prenom: string
@@ -59,6 +60,23 @@ export default function ContactForm() {
             })
           } catch (err) {
             console.error('Webhook n8n failed:', err)
+          }
+        }
+
+        const supabase = getSupabaseClient()
+        if (supabase) {
+          try {
+            const { error: dbError } = await supabase.from('contacts').insert({
+              prenom: formData.prenom,
+              nom: formData.nom,
+              email: formData.email,
+              entreprise: formData.entreprise,
+              secteur: formData.secteur || null,
+              message: formData.besoins || null,
+            })
+            if (dbError) console.error('Supabase insert failed:', dbError)
+          } catch (err) {
+            console.error('Supabase insert failed:', err)
           }
         }
 
