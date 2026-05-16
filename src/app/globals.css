@@ -366,13 +366,20 @@ img {
 }
 
 .hero .container {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 60px;
-    align-items: center;
+    display: flex;
+    justify-content: center;
+    text-align: center;
     position: relative;
     z-index: 1;
 }
+
+.hero-content {
+    max-width: 820px;
+}
+
+.hero-description { margin-left: auto; margin-right: auto; }
+.hero-ctas { justify-content: center; }
+.hero-badges { justify-content: center; flex-wrap: wrap; }
 
 .hero-content {
     animation: fadeInUp 1s ease-out;
@@ -507,36 +514,6 @@ img {
 .dot-violet { background: var(--accent-violet); }
 .dot-cyan { background: var(--accent-cyan); }
 .dot-pink { background: var(--accent-pink); }
-
-/* Hero Visual */
-.hero-visual {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    animation: fadeInUp 1.2s ease-out 0.4s both;
-}
-
-.hero-spline-container {
-    position: relative;
-    overflow: hidden;
-}
-
-.spline-robot {
-    width: 44vw;
-    height: 88vh;
-}
-
-.hero-spline-container canvas {
-    border-radius: 20px;
-}
-
-.hero-spline-loading {
-    width: 500px;
-    height: 500px;
-    border-radius: 20px;
-    background: var(--bg-card);
-}
 
 .hero-graphic {
     position: relative;
