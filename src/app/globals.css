@@ -1008,6 +1008,84 @@ section {
     gap: 20px;
 }
 
+/* --- Carte fondateur --- */
+.founder-card {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: 40px;
+    align-items: center;
+    margin-top: 64px;
+    padding: 40px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+    transition: all 0.3s;
+}
+
+.founder-card:hover {
+    border-color: var(--border-active);
+    box-shadow: var(--shadow-glow);
+}
+
+.founder-photo {
+    position: relative;
+    justify-self: center;
+    width: 260px;
+    height: 260px;
+}
+
+.founder-photo::before {
+    content: '';
+    position: absolute;
+    inset: -18%;
+    background: var(--gradient-glow);
+    border-radius: 50%;
+}
+
+.founder-photo img {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 12%;
+    border-radius: 50%;
+    background: linear-gradient(160deg, rgba(34, 211, 238, 0.18), rgba(8, 145, 178, 0.06));
+    border: 1px solid var(--border-active);
+    box-shadow: var(--shadow-md);
+}
+
+.founder-role {
+    font-family: var(--font-mono), monospace;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent-neon);
+    margin-bottom: 10px;
+}
+
+.founder-name {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--text-white);
+    margin-bottom: 18px;
+}
+
+.founder-quote {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: var(--text-primary);
+    border-left: 2px solid var(--border-active);
+    padding-left: 18px;
+    margin-bottom: 18px;
+}
+
+.founder-bio {
+    color: var(--text-secondary);
+    line-height: 1.7;
+}
+
 .pillar-card {
     background: var(--bg-card);
     border: 1px solid var(--border-subtle);
@@ -1676,6 +1754,22 @@ section {
     .services-grid { grid-template-columns: 1fr; }
     .about-grid { grid-template-columns: 1fr; }
     .contact-grid { grid-template-columns: 1fr; }
+
+    .founder-card {
+        grid-template-columns: 1fr;
+        gap: 28px;
+        padding: 32px 24px;
+        text-align: center;
+    }
+    .founder-photo { width: 200px; height: 200px; }
+    .founder-quote {
+        text-align: left;
+        border-left: none;
+        border-top: 2px solid var(--border-active);
+        padding-left: 0;
+        padding-top: 16px;
+    }
+    .founder-bio { text-align: left; }
     .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
 
     .solution-panel.active {

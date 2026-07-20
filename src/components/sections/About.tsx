@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import { PILLAR_CARDS_DATA, TECH_STACK } from '@/lib/data'
 
 export default function About() {
@@ -48,6 +49,33 @@ export default function About() {
                 <p>{pillar.description}</p>
               </div>
             ))}
+          </div>
+        </div>
+
+        <div className="founder-card reveal">
+          <div className="founder-photo">
+            <Image
+              src="/ceo-stephano.png"
+              alt="Stephano Belleme-Atuahiva, CEO et fondateur de TAHITITECHDIGITAL"
+              width={1000}
+              height={1000}
+              sizes="(max-width: 968px) 200px, 260px"
+            />
+          </div>
+
+          <div className="founder-content">
+            <div className="founder-role">CEO &amp; Fondateur</div>
+            <h3 className="founder-name">Stephano Belleme-Atuahiva</h3>
+            <p className="founder-quote">
+              &laquo; La technologie n&#39;a de valeur que si elle règle un vrai problème.
+              Mon rôle, c&#39;est de traduire 35 ans de terrain polynésien en outils
+              qui font gagner du temps à vos équipes, dès le premier jour. &raquo;
+            </p>
+            <p className="founder-bio">
+              Basé à Punaauia, j&#39;accompagne les entreprises de Polynésie française dans
+              leur automatisation et leur transformation digitale, du premier audit
+              jusqu&#39;à la mise en production.
+            </p>
           </div>
         </div>
       </div>
