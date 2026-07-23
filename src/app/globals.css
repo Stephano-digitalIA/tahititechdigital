@@ -254,6 +254,7 @@ img {
     font-size: 2.4rem;
     color: var(--accent-cyan);
     letter-spacing: -0.02em;
+    white-space: nowrap;
 }
 
 .nav-logo-img {
@@ -1782,6 +1783,9 @@ section {
     .nav-cta { display: none; }
     .nav-mobile-toggle { display: flex; }
 
+    .nav-logo { font-size: 1.5rem; gap: 8px; }
+    .nav-logo-img { height: 48px; }
+
     .nav-links.open {
         display: flex;
         flex-direction: column;
@@ -1812,4 +1816,10 @@ section {
     .sol-tab { padding: 8px 14px; font-size: 0.8rem; }
 
     .solution-stats { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 400px) {
+    .container { padding: 0 16px; }
+    .nav-logo { font-size: 1rem; gap: 6px; }
+    .nav-logo-img { height: 34px; }
 }
