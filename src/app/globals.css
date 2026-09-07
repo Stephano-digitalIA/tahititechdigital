@@ -1364,6 +1364,13 @@ section {
     box-shadow: var(--shadow-neon);
 }
 
+.form-submit:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
 .form-note {
     margin-top: 12px;
     font-size: 0.78rem;

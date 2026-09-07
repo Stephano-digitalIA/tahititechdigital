@@ -1,6 +1,7 @@
 'use client'
 
-import { useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
+import Script from 'next/script'
 import { getSupabaseClient } from '@/lib/supabase'
 
 interface FormData {
@@ -12,9 +13,33 @@ interface FormData {
   besoins: string
 }
 
+interface TurnstileApi {
+  render: (
+    el: HTMLElement,
+    opts: {
+      sitekey: string
+      callback: (token: string) => void
+      'expired-callback'?: () => void
+      'error-callback'?: () => void
+      theme?: 'light' | 'dark' | 'auto'
+    }
+  ) => string
+  reset: (widgetId: string) => void
+}
+
+declare global {
+  interface Window {
+    turnstile?: TurnstileApi
+  }
+}
+
+const TURNSTILE_SITE_KEY = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY
+
 export default function ContactForm() {
   const [submitted, setSubmitted] = useState(false)
   const [loading, setLoading] = useState(false)
+  const [error, setError] = useState('')
+  const [turnstileToken, setTurnstileToken] = useState('')
   const [formData, setFormData] = useState<FormData>({
     prenom: '',
     nom: '',
@@ -23,6 +48,34 @@ export default function ContactForm() {
     secteur: '',
     besoins: '',
   })
+  // Honeypot : champ invisible pour un humain, rempli par les bots
+  const [website, setWebsite] = useState('')
+  const turnstileRef = useRef<HTMLDivElement>(null)
+  const widgetIdRef = useRef<string | null>(null)
+
+  const renderTurnstile = useCallback(() => {
+    if (!TURNSTILE_SITE_KEY || !window.turnstile || !turnstileRef.current) return
+    if (widgetIdRef.current !== null) return
+    widgetIdRef.current = window.turnstile.render(turnstileRef.current, {
+      sitekey: TURNSTILE_SITE_KEY,
+      theme: 'auto',
+      callback: (token) => setTurnstileToken(token),
+      'expired-callback': () => setTurnstileToken(''),
+      'error-callback': () => setTurnstileToken(''),
+    })
+  }, [])
+
+  // Si le script est déjà chargé (navigation client), onLoad ne se redéclenche pas
+  useEffect(() => {
+    renderTurnstile()
+  }, [renderTurnstile])
+
+  const resetTurnstile = () => {
+    setTurnstileToken('')
+    if (widgetIdRef.current !== null && window.turnstile) {
+      window.turnstile.reset(widgetIdRef.current)
+    }
+  }
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
@@ -32,13 +85,18 @@ export default function ContactForm() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    if (TURNSTILE_SITE_KEY && !turnstileToken) {
+      setError('Merci de valider la vérification anti-robot.')
+      return
+    }
+    setError('')
     setLoading(true)
 
     try {
       const res = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({ ...formData, website, turnstileToken }),
       })
 
       if (res.ok) {
@@ -81,14 +139,19 @@ export default function ContactForm() {
         }
 
         setSubmitted(true)
+        resetTurnstile()
         setTimeout(() => {
           setSubmitted(false)
           setFormData({ prenom: '', nom: '', email: '', entreprise: '', secteur: '', besoins: '' })
         }, 3000)
+      } else {
+        const data = (await res.json().catch(() => null)) as { error?: string } | null
+        setError(data?.error ?? "L'envoi a échoué. Merci de réessayer.")
+        resetTurnstile()
       }
     } catch {
-      setSubmitted(true)
-      setTimeout(() => setSubmitted(false), 3000)
+      setError("L'envoi a échoué. Merci de réessayer.")
+      resetTurnstile()
     } finally {
       setLoading(false)
     }
@@ -185,10 +248,41 @@ export default function ContactForm() {
         />
       </div>
 
+      {/* Honeypot : hors écran, ignoré par les lecteurs d'écran et l'autocomplétion */}
+      <div style={{ position: 'absolute', left: '-9999px', width: '1px', height: '1px', overflow: 'hidden' }} aria-hidden="true">
+        <label htmlFor="website">Site web</label>
+        <input
+          id="website"
+          type="text"
+          name="website"
+          value={website}
+          onChange={(e) => setWebsite(e.target.value)}
+          tabIndex={-1}
+          autoComplete="off"
+        />
+      </div>
+
+      {TURNSTILE_SITE_KEY && (
+        <>
+          <Script
+            src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit"
+            strategy="afterInteractive"
+            onLoad={renderTurnstile}
+          />
+          <div ref={turnstileRef} className="form-group" />
+        </>
+      )}
+
+      {error && (
+        <p className="form-error" role="alert" style={{ color: '#ef4444', marginBottom: '12px' }}>
+          {error}
+        </p>
+      )}
+
       <button
         type="submit"
         className="form-submit"
-        disabled={loading}
+        disabled={loading || (!!TURNSTILE_SITE_KEY && !turnstileToken)}
         style={
           submitted
             ? { background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)' }
