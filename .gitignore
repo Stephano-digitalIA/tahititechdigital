@@ -34,3 +34,5 @@ Thumbs.db
 
 # PDF et fichiers locaux
 *.pdf
+/assets/
+spline skill.zip
